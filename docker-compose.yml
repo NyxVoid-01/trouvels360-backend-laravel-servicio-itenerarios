@@ -1,0 +1,21 @@
+services:
+  # Servicio de itinerarios FastAPI
+  itinerarios-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trouvels360-itinerarios
+    ports:
+      - "8001:8001"
+    env_file:
+      - .env.fastapi
+    volumes:
+      - ./app:/app/app
+    restart: unless-stopped
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+    networks:
+      - trouvels360-backend-laravel_trouvels360_network
+
+networks:
+  trouvels360-backend-laravel_trouvels360_network:
+    external: true
