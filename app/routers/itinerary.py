@@ -4,6 +4,7 @@ from app.config.database import get_db
 from app.schemas.request import ItineraryRequest
 from app.schemas.response import ItineraryResponse, ErrorResponse
 from app.services.itinerary_service import ItineraryService
+from app.security import get_current_user, TokenData   # ✅ Importamos la validación de JWT
 import logging
 
 # Configurar logging
@@ -18,12 +19,14 @@ router = APIRouter(
 
 @router.post("/itinerary", response_model=ItineraryResponse, responses={
     400: {"model": ErrorResponse, "description": "Error de validación"},
+    401: {"model": ErrorResponse, "description": "No autenticado"},
     404: {"model": ErrorResponse, "description": "Recurso no encontrado"},
     503: {"model": ErrorResponse, "description": "Servicio no disponible"}
 })
 async def generar_itinerario(
     request: ItineraryRequest,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: TokenData = Depends(get_current_user)
 ):
     """
     Genera un itinerario personalizado basado en el destino, hotel y número de días.

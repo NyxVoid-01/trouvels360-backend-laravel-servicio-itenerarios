@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = True
     
+    JWT_SECRET: str
+    JWT_ALGORITHM: str = "HS256"
+    JWT_ISSUER: str = "http://localhost:8000"
+    JWT_AUDIENCE: str = "fastapi-itinerarios"
+
     # Business Rules
     HORAS_DISPONIBLES_POR_DIA: int = 8
     
