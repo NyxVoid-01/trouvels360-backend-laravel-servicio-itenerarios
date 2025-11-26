@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional
 from decimal import Decimal
 
@@ -19,6 +19,8 @@ class ActividadSchema(BaseModel):
     total_resenas: int
     imagen_url: Optional[str]
     ubicacion: UbicacionSchema
+    distancia_km: float = Field(..., description="Distancia en km desde el hotel")
+    score: float = Field(..., description="Score de calidad ponderado (0-100)")
 
 
 class DiaItinerarioSchema(BaseModel):
@@ -27,11 +29,12 @@ class DiaItinerarioSchema(BaseModel):
     actividades: List[ActividadSchema]
     horas_totales: float
     costo_total_dia: Decimal
+    distancia_total_dia: float = Field(..., description="Distancia total recorrida en el día (km)")
 
 
 class DestinoSchema(BaseModel):
-    id: int
     nombre: str
+    ciudad: str
     pais: str
 
 

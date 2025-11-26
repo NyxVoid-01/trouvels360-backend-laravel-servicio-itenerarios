@@ -13,6 +13,8 @@ class Servicio(Base):
     descripcion = Column(Text, nullable=True)
     ciudad = Column(String(100), nullable=False, index=True)
     pais = Column(String(100), nullable=False)
+    latitud = Column(DECIMAL(10, 6), nullable=True)
+    longitud = Column(DECIMAL(10, 6), nullable=True)
     imagen_url = Column(String(500), nullable=True)
     activo = Column(Boolean, default=True)
     created_at = Column(TIMESTAMP, nullable=True)
