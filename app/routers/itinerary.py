@@ -49,7 +49,7 @@ async def generar_itinerario(
     
     **Nuevo algoritmo híbrido con optimización de distancias:**
     - Calcula automáticamente los días desde check-in/check-out
-    - Filtra tours por categoría de interés (opcional)
+    - Filtra tours por categoría de interés
     - Usa scoring multinivel (rating + distancia + precio)
     - Optimiza ruta diaria con algoritmo Nearest Neighbor
     - Complejidad: O(N log N)
@@ -60,7 +60,7 @@ async def generar_itinerario(
     - **fecha_checkin**: Fecha de check-in (YYYY-MM-DD)
     - **fecha_checkout**: Fecha de check-out (YYYY-MM-DD)
     
-    **Campos opcionales:**
+    **Campos obligatorios adicionales:**
     - **interes**: Tipo de viaje (Aventura, Relajación, Cultura, Gastronomía)
     
     **Validaciones:**
@@ -80,7 +80,7 @@ async def generar_itinerario(
             hotel_id=request.hotel_id,
             fecha_checkin=request.fecha_checkin,
             fecha_checkout=request.fecha_checkout,
-            interes=request.interes.value if request.interes else None
+            interes=request.interes.value
         )
         
         # Mensaje personalizado según autenticación

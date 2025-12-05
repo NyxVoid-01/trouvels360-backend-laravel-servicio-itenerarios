@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field, field_validator
-from typing import Optional
 from datetime import date
 from enum import Enum
 
@@ -17,7 +16,7 @@ class ItineraryRequest(BaseModel):
     hotel_id: int = Field(..., gt=0, description="ID del hotel (servicio_id)")
     fecha_checkin: date = Field(..., description="Fecha de check-in en el hotel")
     fecha_checkout: date = Field(..., description="Fecha de check-out del hotel")
-    interes: Optional[InteresEnum] = Field(None, description="Tipo de interés de viaje (opcional)")
+    interes: InteresEnum = Field(..., description="Tipo de interés de viaje (obligatorio)")
     
     @field_validator('fecha_checkout')
     @classmethod
