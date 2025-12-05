@@ -26,4 +26,5 @@ COPY .env.fastapi .env.fastapi
 EXPOSE 8001
 
 # Comando para ejecutar la aplicación
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
+# Railway inyecta la variable $PORT automáticamente
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8001}"]

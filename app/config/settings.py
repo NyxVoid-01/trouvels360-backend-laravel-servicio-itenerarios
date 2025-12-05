@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+import os
 
 
 class Settings(BaseSettings):
@@ -12,16 +13,17 @@ class Settings(BaseSettings):
     
     # Server
     SERVER_HOST: str = "0.0.0.0"
-    SERVER_PORT: int = 8001
-    SERVER_RELOAD: bool = True
+    SERVER_PORT: int = int(os.getenv("PORT", "8001"))  # Railway usa PORT dinámico
+    SERVER_RELOAD: bool = False
     
-    # CORS
+    # CORS - Permitir múltiples orígenes separados por coma
     FRONTEND_URL: str = "http://localhost:4200"
+    ALLOWED_ORIGINS: str = "http://localhost:4200,http://localhost:8000"
     
     # App
     APP_NAME: str = "Itinerarios Service"
     APP_VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False
     
     JWT_SECRET: str
     JWT_ALGORITHM: str = "HS256"
