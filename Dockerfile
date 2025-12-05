@@ -19,9 +19,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiar código de la aplicación
 COPY ./app ./app
 
-# Copiar archivo de configuración
-COPY .env.fastapi .env.fastapi
-
 # Exponer puerto
 EXPOSE 8001
 
