@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     
     class Config:
         env_file = ".env.fastapi"
+        extra = "ignore"
         case_sensitive = True
 
 
