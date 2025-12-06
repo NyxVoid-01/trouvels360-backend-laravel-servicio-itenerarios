@@ -384,7 +384,7 @@ class ItineraryService:
                 TourActividad.servicio_id == tour.id
             ).scalar()
             
-            duracion_horas = float(duracion_total) / 60.0 if duracion_total else 4.0  # Default 4 horas
+            duracion_horas = round(float(duracion_total) / 60.0, 2) if duracion_total else 4.0
             
             # Calcular distancia desde el hotel usando coordenadas reales
             if tour.latitud and tour.longitud:
